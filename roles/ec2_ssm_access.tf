@@ -16,7 +16,7 @@ resource "aws_iam_policy" "ssm_access_policy" {
       {
         Effect = "Allow",
         Action = "kms:Decrypt",
-        Resource = "*" # Consider restricting this to a specific key in production
+        Resource = "*"
       }
     ]
   })
