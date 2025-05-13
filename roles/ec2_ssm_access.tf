@@ -1,23 +1,3 @@
-variable "ssm_parameter_name" {
-  type    = string
-  default = "/jenkins/secret"
-}
-
-variable "iam_role_name" {
-  type    = string
-  default = "ec2_ssm_access_role"
-}
-
-variable "iam_instance_profile_name" {
-  type    = string
-  default = "ec2_ssm_instance_profile"
-}
-
-variable "region" {
-  type    = string
-  default = "us-east-1"
-}
-
 data "aws_caller_identity" "current" {}
 
 resource "aws_iam_policy" "ssm_access_policy" {
@@ -36,7 +16,7 @@ resource "aws_iam_policy" "ssm_access_policy" {
       {
         Effect = "Allow",
         Action = "kms:Decrypt",
-        Resource = "*" # optionally restrict to specific KMS
+        Resource = "*" # Consider restricting this to a specific key in production
       }
     ]
   })
@@ -66,8 +46,4 @@ resource "aws_iam_role_policy_attachment" "attach_ssm" {
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
   name = var.iam_instance_profile_name
   role = aws_iam_role.ec2_ssm_role.name
-}
-
-output "instance_profile_name" {
-  value = aws_iam_instance_profile.ec2_instance_profile.name
 }
