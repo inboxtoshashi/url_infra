@@ -1,15 +1,23 @@
 #!/bin/bash
 
-# Set the directory where your main.tf and other Terraform configs are located
-TF_DIR="../url_infra"  # Adjust this path to your actual structure
+# Move to the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "[📍] Changing directory to Terraform config: $TF_DIR"
-cd "$TF_DIR" || { echo "[❌] Failed to enter Terraform directory"; exit 1; }
+# Move to project root (one level above scripts/)
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
-echo "[🔄] Initializing Terraform..."
-terraform init -input=false
+echo "[📍] Moving to Terraform project root: $PROJECT_ROOT"
+cd "$PROJECT_ROOT" || { echo "[❌] Could not change directory to $PROJECT_ROOT"; exit 1; }
 
-echo "[🔍] Running Terraform plan..."
-terraform plan -input=false
+# List files to confirm you're in the right directory
+echo "[📁] Files in current directory:"
+ls -l
 
-echo "[✅] Terraform plan completed."
+# Initialize and plan Terraform
+echo "[🔄] Running terraform init..."
+terraform init -input=false || { echo "[❌] terraform init failed"; exit 1; }
+
+echo "[🔍] Running terraform plan..."
+terraform plan -input=false || { echo "[❌] terraform plan failed"; exit 1; }
+
+echo "[✅] Plan complete."
