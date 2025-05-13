@@ -7,16 +7,24 @@ data "aws_ssm_parameter" "parameter" {
 }
 
 module "ec2_resource" {
-  source                 = "./ec2"
-  ami                    = data.aws_ssm_parameter.parameter.value
-  public_subnet_id       = module.subnet_resource.public_subnet_id_result
-  vpc_security_group_ids = module.security_group_resource.sg_id_result
+  source                    = "./ec2"
+  ami                       = data.aws_ssm_parameter.parameter.value
+  public_subnet_id          = module.subnet_resource.public_subnet_id_result
+  iam_instance_profile_name = module.roles.instance_profile_name
+  vpc_security_group_ids    = module.security_group_resource.sg_id_result
+  iam_instance_profile      = aws_iam_instance_profile.ec2_instance_profile.name
 }
 
 module "aws_internet_gateway" {
   source = "./igw"
   //passsing vpc_id to igw.tf to attach the vpc with internet_gateway
   vpc_id = module.vpc_resource.vpc_id_result
+}
+
+module "roles" {
+  source                = "./modules/roles"
+  ssm_parameter_name    = "/jenkins/secret"
+  region                = "us-east-1"
 }
 
 module "route_table_resource" {
