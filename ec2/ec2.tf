@@ -3,7 +3,7 @@ resource "aws_instance" "public_ec2" {
   name                   = "url_app"
   ami                    = var.ami
   key_name               = var.ssh_key
-  iam_instance_profile   = var.iam_instance_profile_name
+  iam_instance_profile   = var.iam_instance_profile
   subnet_id              = var.public_subnet_id
   vpc_security_group_ids = [var.vpc_security_group_ids]
   tags = {

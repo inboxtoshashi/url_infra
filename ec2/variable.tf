@@ -13,7 +13,7 @@ variable "vpc_security_group_ids" {}
 
 variable "ami" {}
 
-variable "iam_instance_profile_name" {
+variable "iam_instance_profile" {
   type        = string
   description = "IAM instance profile name for EC2"
 }
