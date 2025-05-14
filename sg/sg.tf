@@ -1,5 +1,4 @@
 resource "aws_security_group" "sg1" {
-  name   = "url_sg"
   vpc_id = var.vpc_id
 
   dynamic "ingress" {
