@@ -21,8 +21,3 @@ resource "aws_instance" "public_ec2" {
     }
   }
 }
-
-variable "iam_instance_profile_name" {
-  type        = string
-  description = "IAM instance profile name for EC2"
-}
