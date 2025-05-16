@@ -18,6 +18,6 @@ echo "[🔄] Running terraform init..."
 terraform init -input=false || { echo "[❌] terraform init failed"; exit 1; }
 
 echo "[🔍] Running terraform plan..."
-tterraform apply -input=false -auto-approve || { echo "[❌] terraform plan failed"; exit 1; }
+terraform apply -input=false -auto-approve || { echo "[❌] terraform plan failed"; exit 1; }
 
 echo "[✅] Apply completed."
