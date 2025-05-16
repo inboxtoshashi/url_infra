@@ -22,10 +22,6 @@ module "aws_internet_gateway" {
 
 module "roles" {
   source                    = "./roles"
-  ssm_parameter_name        = "/jenkins/secret"
-  region                    = "us-east-1"
-  iam_role_name             = "jenkins_ec2_role"
-  iam_instance_profile_name = "jenkins_ec2_profile"
 }
 
 module "route_table_resource" {
