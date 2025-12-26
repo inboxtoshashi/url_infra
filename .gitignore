@@ -1,0 +1,14 @@
+# Ignore Terraform state files and backup files
+*.tfstate
+*.tfstate.backup
+
+# Ignore Terraform working directories
+.terraform/
+
+# Ignore other sensitive or unnecessary files
+*.log
+*.bak
+*.swp
+
+# Ignore Jenkins stage files
+jenkins_stage.txt
