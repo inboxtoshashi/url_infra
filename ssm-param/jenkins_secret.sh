@@ -8,7 +8,6 @@ JENKINS_SECRET=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 8)
 # Parameter name
 PARAM_NAME="/jenkins/secret"
 
-# AWS region
 AWS_REGION="us-east-1"
 
 echo "[+] Creating SSM parameter: $PARAM_NAME"

@@ -1,19 +1,36 @@
 variable "ssh_key" {
+  type    = string
   default = "url_app"
 }
 
 variable "type" {
+  type    = string
   default = "t2.micro"
 }
 
-//declared to define in main.tf to get the subnet id from output of subnet resource
-variable "public_subnet_id" {}
-//declared to define in main.tf to get the security_group id from output of security_group_resource
-variable "vpc_security_group_ids" {}
+variable "public_subnet_id" {
+  type = string
+}
 
-variable "ami" {}
+variable "vpc_security_group_ids" {
+  type = list(string)
+}
+
+variable "ami_id" {
+  type = string
+}
 
 variable "iam_instance_profile" {
   type        = string
   description = "IAM instance profile name for EC2"
+}
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}
+
+variable "name" {
+  description = "Name tag for the EC2 instance"
+  type        = string
 }

@@ -4,9 +4,7 @@ resource "aws_route_table" "public_route_table" {
     cidr_block = var.route
     gateway_id = var.gateway_id
   }
-  tags = {
-    Name = "url_public_route_table"
-  }
+  tags = merge(var.tags, { Name = var.name, Environment = var.env })
 }
 
 resource "aws_route_table_association" "public-rt" {

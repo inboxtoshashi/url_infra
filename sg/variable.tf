@@ -9,3 +9,18 @@ variable "egressrules" {
 }
 
 variable "vpc_id" {}
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}
+
+variable "name" {
+  type    = string
+  default = "url_sg"
+}
+
+variable "env" {
+  description = "Environment name (e.g., dev, prod)"
+  type        = string
+}
