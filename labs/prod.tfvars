@@ -8,6 +8,7 @@ name = "prod-ec2-instance"
 
 tags = {
   Project     = "url_infra"
+  App         = "URL_Shortner"
   Environment = "prod"
   ManagedBy   = "terraform"
 }
