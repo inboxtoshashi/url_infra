@@ -46,9 +46,16 @@ if [ -f "$ENV_DIR/terraform.tfstate" ]; then
   echo "[$(date +'%Y-%m-%d %H:%M:%S')] 📦 Backed up: $(basename $BACKUP_FILE)"
 fi
 
-# Copy new state to centralized location
-cp "$SOURCE_STATE" "$ENV_DIR/terraform.tfstate"
-echo "[$(date +'%Y-%m-%d %H:%M:%S')] ✅ Updated: $ENV_DIR/terraform.tfstate"
+# Copy new state to centralized location only if source is different
+SOURCE_REALPATH=$(realpath "$SOURCE_STATE")
+TARGET_REALPATH=$(realpath "$ENV_DIR/terraform.tfstate" 2>/dev/null || echo "")
+
+if [ "$SOURCE_REALPATH" != "$TARGET_REALPATH" ]; then
+  cp "$SOURCE_STATE" "$ENV_DIR/terraform.tfstate"
+  echo "[$(date +'%Y-%m-%d %H:%M:%S')] ✅ Updated: $ENV_DIR/terraform.tfstate"
+else
+  echo "[$(date +'%Y-%m-%d %H:%M:%S')] ℹ️  Source is already in centralized location, no copy needed"
+fi
 
 # Keep only last 10 backups per environment
 cd "$BACKUP_DIR"
