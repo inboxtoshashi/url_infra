@@ -37,3 +37,9 @@ variable "name" {
   description = "Name tag for the EC2 instance"
   type        = string
 }
+
+variable "type" {
+  description = "EC2 instance type (e.g., t2.micro, t3.small, t3.medium)"
+  type        = string
+  default     = "t2.micro"
+}

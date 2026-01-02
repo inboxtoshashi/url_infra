@@ -5,6 +5,7 @@ data "aws_ssm_parameter" "parameter" {
 module "ec2_resource" {
   source                    = "../../ec2"
   ami_id                    = data.aws_ssm_parameter.parameter.value
+  type                      = var.type
   public_subnet_id          = module.subnet_resource.public_subnet_id_result
   iam_instance_profile      = module.roles.instance_profile_name
   vpc_security_group_ids    = [module.security_group_resource.sg_id_result]

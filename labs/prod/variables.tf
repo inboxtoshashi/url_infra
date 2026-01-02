@@ -27,3 +27,19 @@ variable "vpc_name" {
   description = "Explicit VPC name for this environment"
   type        = string
 }
+
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+}
+
+variable "name" {
+  description = "Name tag for the EC2 instance"
+  type        = string
+}
+
+variable "type" {
+  description = "EC2 instance type (e.g., t2.micro, t3.small, t3.medium)"
+  type        = string
+  default     = "t2.micro"
+}
