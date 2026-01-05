@@ -13,6 +13,7 @@ module "ec2_resource" {
   name                      = var.name
 }
 
+
 module "aws_internet_gateway" {
   source = "../../igw"
   //passsing vpc_id to igw.tf to attach the vpc with internet_gateway
@@ -55,10 +56,4 @@ module "vpc_resource" {
   vpc_cidr = var.vpc_cidr
   env      = var.env
   tags     = var.tags
-}
-
-# Outputs
-output "public_ip" {
-  description = "Public IP of the EC2 instance"
-  value       = module.ec2_resource.public_ip
 }
