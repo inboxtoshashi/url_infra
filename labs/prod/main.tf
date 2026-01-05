@@ -46,6 +46,7 @@ module "subnet_resource" {
   tags              = var.tags
 }
 
+
 module "vpc_resource" {
   source   = "../../vpc"
   vpc_name = var.vpc_name

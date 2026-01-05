@@ -13,6 +13,7 @@ module "ec2_resource" {
   name                      = var.name
 }
 
+
 module "aws_internet_gateway" {
   source = "../../igw"
   //passsing vpc_id to igw.tf to attach the vpc with internet_gateway
